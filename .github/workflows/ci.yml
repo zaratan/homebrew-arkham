@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Checkout into tap directory
+        uses: actions/checkout@v4
+        with:
+          path: homebrew-arkham
+
+      - name: Move repo into Homebrew taps location
+        run: |
+          tap_dir="$(brew --repository)/Library/Taps/zaratan"
+          mkdir -p "$tap_dir"
+          mv homebrew-arkham "$tap_dir/homebrew-arkham"
+
+      - name: brew style
+        run: brew style zaratan/arkham
+
+      - name: brew audit
+        run: brew audit --cask --tap zaratan/arkham
