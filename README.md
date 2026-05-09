@@ -24,11 +24,7 @@ brew install shoggoth
 
 ## Updating versions
 
-Run [`brew livecheck`](https://docs.brew.sh/Brew-Livecheck) to detect new releases:
-
-```sh
-brew livecheck --cask zaratan/arkham/strange-eons zaratan/arkham/shoggoth
-```
+A Github action will fetch for new versions every day at 6am (UTC) an create a new PR for each new update.
 
 The `strange-eons` cask follows GitHub releases including prereleases (since the project ships beta versions for long stretches). To split into stable + beta channels later, fork the cask into `strange-eons` (stable) and `strange-eons@beta` (prerelease).
 
