@@ -11,16 +11,16 @@ brew tap zaratan/arkham
 Then install one of the casks:
 
 ```sh
-brew install --cask zaratan/arkham/strange-eons
-brew install --cask zaratan/arkham/shoggoth
+brew install strange-eons
+brew install shoggoth
 ```
 
 ## Available casks
 
-| Cask | Description | Upstream |
-|---|---|---|
+| Cask           | Description                                               | Upstream                                                                                                                                      |
+| -------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `strange-eons` | Design tool for paper-based games (Arkham LCG and others) | [strangeeons.org](https://strangeeons.org/) — releases on [christophercurrie/strange-eons](https://github.com/christophercurrie/strange-eons) |
-| `shoggoth` | Card creation tool for Arkham Horror: The Card Game | [tokeeto/shoggoth](https://github.com/tokeeto/shoggoth) |
+| `shoggoth`     | Card creation tool for Arkham Horror: The Card Game       | [tokeeto/shoggoth](https://github.com/tokeeto/shoggoth)                                                                                       |
 
 ## Updating versions
 
