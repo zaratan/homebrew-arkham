@@ -15,10 +15,13 @@ jobs:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: Configure git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Bump outdated casks
-        uses: macauley/action-homebrew-bump-cask@v1
-        with:
-          token: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
-          tap: zaratan/arkham
-          livecheck: true
-          force: false
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
+          GH_TOKEN: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
+        run: brew bump --tap zaratan/arkham --cask --open-pr --no-fork
