@@ -15,6 +15,8 @@ cask "shoggoth" do
     strategy :github_latest
   end
 
+  depends_on :macos
+
   app "Shoggoth.app"
 
   zap trash: [

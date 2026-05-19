@@ -26,6 +26,8 @@ cask "strange-eons" do
     end
   end
 
+  depends_on :macos
+
   app "Strange Eons.app"
 
   zap trash: [
