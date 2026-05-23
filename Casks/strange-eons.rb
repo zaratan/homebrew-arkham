@@ -1,9 +1,9 @@
 cask "strange-eons" do
   arch arm: "aarch64", intel: "x64"
 
-  version "3.5.0-beta4"
-  sha256 arm:   "94b51a091176a2f9be3e8c3ad4e33883174af67136a9ad9fd26e62721f64f1ec",
-         intel: "d95936dff175f529999c492c0473aef0faf9a541e64c0f59fd47fbfa93272f42"
+  version "3.5.0"
+  sha256 arm:   "d30ceba0995341f590abdd5e0be5eaea22871df0d1642a7cbed61f04b32541b9",
+         intel: "694a354572b33a905643538a0c8c98eebceab3000368362613cdfc4eb9448bca"
 
   url "https://github.com/christophercurrie/strange-eons/releases/download/v#{version}/strange-eons-#{version}-macos-#{arch}.dmg",
       verified: "github.com/christophercurrie/strange-eons/"
