@@ -1,9 +1,9 @@
 cask "shoggoth" do
   arch arm: "mac", intel: "mac-intel"
 
-  version "0.8.4"
-  sha256 arm:   "8ac5c13a4f94de97bad42bb511985a81fd490776d4c771d2b10a89652122bf94",
-         intel: "c2676a271bbd914a8a0c822b928a697323ffa8c2009e487860a548b223ab7007"
+  version "0.8.6"
+  sha256 arm:   "bf0d706d1ee1f98aaa7ad04d5f1e7ea99b1a6e4472adb042b03d9edd3c3dc0e2",
+         intel: "b55788a42a5d17210c88e4e7dfd7089863301de053ed08fbaf47596c99656422"
 
   url "https://github.com/tokeeto/shoggoth/releases/download/v#{version}/Shoggoth-#{arch}.zip"
   name "Shoggoth"
