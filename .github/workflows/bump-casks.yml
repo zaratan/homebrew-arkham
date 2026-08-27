@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   bump:
@@ -22,7 +23,11 @@ jobs:
 
       - name: Bump outdated casks
         env:
+          # PAT: pushes the branch (a push by GITHUB_TOKEN would not trigger CI)
           GH_TOKEN: ${{ secrets.HOMEBREW_BUMP_TOKEN }}
+          # Actions token: opens the PR as github-actions[bot], so that the PAT
+          # owner is not the PR author and can be requested as a reviewer
+          BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -uo pipefail
 
@@ -107,13 +112,13 @@ jobs:
             git commit -m "${cask} ${latest}"
             git push -u origin "$branch"
 
-            gh pr create \
+            GH_TOKEN="$BOT_TOKEN" gh pr create \
               --repo "$REPO" \
               --base main \
               --head "$branch" \
               --title "${cask} ${latest}" \
               --body "Automated bump of \`${cask}\` from \`${current}\` to \`${latest}\`." \
-              --assignee zaratan
+              --reviewer zaratan
 
             git checkout main
             echo "::endgroup::"

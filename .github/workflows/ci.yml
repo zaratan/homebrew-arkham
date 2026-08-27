@@ -2,7 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    # bump-* covers the automated cask bumps: their PR is opened by
+    # github-actions[bot], and a PR opened by GITHUB_TOKEN does not trigger
+    # `pull_request` workflows, so CI runs off the branch push instead.
+    branches: [main, 'bump-*']
   pull_request:
 
 permissions:
