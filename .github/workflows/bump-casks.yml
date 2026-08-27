@@ -112,7 +112,8 @@ jobs:
               --base main \
               --head "$branch" \
               --title "${cask} ${latest}" \
-              --body "Automated bump of \`${cask}\` from \`${current}\` to \`${latest}\`."
+              --body "Automated bump of \`${cask}\` from \`${current}\` to \`${latest}\`." \
+              --assignee zaratan
 
             git checkout main
             echo "::endgroup::"
