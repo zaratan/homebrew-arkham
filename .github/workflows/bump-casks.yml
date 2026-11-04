@@ -38,7 +38,7 @@ jobs:
           outdated=$(brew livecheck --tap "$TAP" --cask --newer-only --json)
           echo "Livecheck output: $outdated"
 
-          echo "$outdated" | jq -r '.[] | [.cask, .version.current, .version.latest] | @tsv' | \
+          echo "$outdated" | jq -r '.[] | select(.version.latest != null) | [.cask, .version.current, .version.latest] | @tsv' | \
           while IFS=$'\t' read -r cask current latest; do
             echo "::group::Bumping $cask: $current -> $latest"
 
@@ -46,7 +46,8 @@ jobs:
 
             # Skip if a PR for this exact bump already exists (any state)
             existing=$(gh pr list --repo "$REPO" --state all \
-              --search "\"${cask} ${latest}\" in:title" --json number --jq 'length')
+              --search "\"${cask} ${latest}\" in:title" --json title \
+              | jq --arg title "${cask} ${latest}" 'map(select(.title == $title)) | length')
             if [ "$existing" != "0" ]; then
               echo "PR for ${cask} ${latest} already exists, skipping."
               echo "::endgroup::"
@@ -79,9 +80,8 @@ jobs:
             echo "Intel URL: $url_intel"
 
             # Download streaming and compute SHA256 (no need to keep the file)
-            sha_arm=$(curl -sSfL "$url_arm" | shasum -a 256 | awk '{print $1}')
-            sha_intel=$(curl -sSfL "$url_intel" | shasum -a 256 | awk '{print $1}')
-            if [ -z "$sha_arm" ] || [ -z "$sha_intel" ]; then
+            if ! sha_arm=$(curl -sSfL "$url_arm" | shasum -a 256 | awk '{print $1}') \
+              || ! sha_intel=$(curl -sSfL "$url_intel" | shasum -a 256 | awk '{print $1}'); then
               echo "ERROR: failed to compute sha256, skipping."
               echo "::endgroup::"
               continue

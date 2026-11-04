@@ -5,8 +5,8 @@ cask "strange-eons" do
   sha256 arm:   "4c4a00b1780a22f283248b67abfe7b5bba8104b22f0f9d95a9cd09d7eb78180b",
          intel: "b069167eb8cfbc4eea89f41c0435f1f6b70766cf1865687bfba9b26de2696d50"
 
-  url "https://github.com/christophercurrie/strange-eons/releases/download/v#{version}/strange-eons-#{version}-macos-#{arch}.dmg",
-      verified: "github.com/christophercurrie/strange-eons/"
+  url "https://github.com/strange-eons/strange-eons/releases/download/v#{version}/strange-eons-#{version}-macos-#{arch}.dmg",
+      verified: "github.com/strange-eons/strange-eons/"
   name "Strange Eons"
   desc "Design tool for paper-based games (Arkham Horror LCG, etc.)"
   homepage "https://strangeeons.org/"
